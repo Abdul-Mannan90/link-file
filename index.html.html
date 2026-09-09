@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Elite Design — Premium Creative Agency</title>
+<meta name="description" content="Elite Design is a premium creative agency crafting logos, brand identity, UI/UX and websites for ambitious businesses worldwide." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary: '#7B61FF',
+          secondary: '#A855F7',
+          accent: '#EDE9FE',
+          ink: '#111111',
+          muted: '#666666',
+          section: '#F8F9FC',
+        },
+        fontFamily: {
+          display: ['Poppins', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+        },
+        borderRadius: {
+          'card': '24px',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --primary:#7B61FF;
+    --secondary:#A855F7;
+    --accent:#EDE9FE;
+    --bg:#FFFFFF;
+    --section-bg:#F8F9FC;
+    --ink:#111111;
+    --muted:#666666;
+  }
+  html.dark{
+    --bg:#0B0B10;
+    --section-bg:#131319;
+    --ink:#F5F5F7;
+    --muted:#A0A0AC;
+    --accent:#1E1B2E;
+  }
+  *{ scrollbar-width: thin; scrollbar-color: var(--primary) transparent; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    transition:background .4s ease, color .4s ease;
+  }
+  .font-display{ font-family:'Poppins',sans-serif; }
+  .bg-section{ background:var(--section-bg); }
+  .text-muted{ color:var(--muted); }
+  .grad-text{
+    background:linear-gradient(120deg,var(--primary),var(--secondary));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .grad-bg{ background:linear-gradient(120deg,var(--primary),var(--secondary)); }
+  .grad-border{
+    position:relative;
+    border:1px solid transparent;
+    background-clip:padding-box;
+  }
+  .grad-border::before{
+    content:'';
+    position:absolute; inset:0;
+    border-radius:inherit;
+    padding:1px;
+    background:linear-gradient(120deg,var(--primary),var(--secondary));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:0;
+    transition:opacity .4s ease;
+    pointer-events:none;
+  }
+  .grad-border:hover::before{ opacity:1; }
+
+  .glass{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(20px) saturate(180%);
+    -webkit-backdrop-filter:blur(20px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.4);
+  }
+  html.dark .glass{
+    background:rgba(20,20,28,0.55);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .card-shadow{ box-shadow:0 20px 60px -20px rgba(123,97,255,0.25); }
+
+  /* reveal animations */
+  [data-reveal]{ opacity:0; transition:opacity .9s cubic-bezier(.16,.8,.24,1), transform .9s cubic-bezier(.16,.8,.24,1); will-change:transform,opacity; }
+  [data-reveal="up"]{ transform:translateY(48px); }
+  [data-reveal="left"]{ transform:translateX(-48px); }
+  [data-reveal="right"]{ transform:translateX(48px); }
+  [data-reveal="scale"]{ transform:scale(.92); }
+  [data-reveal].revealed{ opacity:1; transform:translate(0,0) scale(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ transition:none !important; opacity:1 !important; transform:none !important; }
+    .floaty, .marquee-track, .blob{ animation:none !important; }
+  }
+
+  .floaty{ animation:floaty 6s ease-in-out infinite; }
+  .floaty-slow{ animation:floaty 9s ease-in-out infinite; }
+  .floaty-rev{ animation:floatyRev 7s ease-in-out infinite; }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0px);} 50%{ transform:translateY(-18px);} }
+  @keyframes floatyRev{ 0%,100%{ transform:translateY(0px);} 50%{ transform:translateY(16px);} }
+
+  .blob{ animation:blobMove 14s ease-in-out infinite; filter:blur(60px); }
+  @keyframes blobMove{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    33%{ transform:translate(30px,-40px) scale(1.1); }
+    66%{ transform:translate(-20px,20px) scale(0.95); }
+  }
+
+  .marquee-wrap{ overflow:hidden; -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+  .marquee-track{ display:flex; width:max-content; animation:marquee 28s linear infinite; }
+  @keyframes marquee{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  .marquee-track:hover{ animation-play-state:paused; }
+
+  .btn-magnet{ transition:transform .25s cubic-bezier(.16,.8,.24,1), box-shadow .25s ease; }
+
+  .cursor-glow{
+    position:fixed; top:0; left:0; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(123,97,255,0.18), transparent 70%);
+    pointer-events:none; z-index:0; transform:translate(-50%,-50%);
+    transition:opacity .3s ease; opacity:0;
+  }
+
+  input[type="text"]:focus-visible, input[type="email"]:focus-visible, input[type="tel"]:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible{
+    outline:2px solid var(--primary); outline-offset:3px;
+  }
+
+  .progress-line{
+    position:absolute; left:23px; top:0; width:2px; background:linear-gradient(var(--primary),var(--secondary));
+    height:0%; transition:height .1s linear;
+  }
+
+  .accordion-content{ max-height:0; overflow:hidden; transition:max-height .5s cubic-bezier(.16,.8,.24,1), padding .4s ease; }
+
+  .portfolio-item{ transition:transform .5s cubic-bezier(.16,.8,.24,1); }
+  .filter-btn.active{ background:linear-gradient(120deg,var(--primary),var(--secondary)); color:#fff; }
+
+  ::selection{ background:var(--primary); color:#fff; }
+</style>
+</head>
+<body class="antialiased">
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-full">Skip to main content</a>
+
+<!-- ================= NAVIGATION ================= -->
+<header id="siteNav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <nav class="mx-auto max-w-7xl px-6 lg:px-10" aria-label="Primary">
+    <div id="navInner" class="mt-4 flex items-center justify-between rounded-full glass card-shadow px-5 py-3 transition-all duration-500">
+      <a href="#home" class="font-display font-extrabold text-xl tracking-tight flex items-center gap-2">
+        <span class="w-8 h-8 rounded-xl grad-bg flex items-center justify-center text-white text-sm">ED</span>
+        Elite <span class="grad-text">Design</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+        <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+        <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+        <li><a href="#services" class="hover:text-primary transition-colors">Services</a></li>
+        <li><a href="#portfolio" class="hover:text-primary transition-colors">Portfolio</a></li>
+        <li><a href="#clients" class="hover:text-primary transition-colors">Clients</a></li>
+        <li><a href="#testimonials" class="hover:text-primary transition-colors">Testimonials</a></li>
+        <li><a href="#faq" class="hover:text-primary transition-colors">FAQ</a></li>
+        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <button id="darkToggle" aria-label="Toggle dark mode" class="w-10 h-10 rounded-full flex items-center justify-center border border-black/10 dark:border-white/10 hover:border-primary transition-colors">
+          <svg id="iconSun" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg id="iconMoon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+        </button>
+        <a href="#contact" class="btn-magnet hidden md:inline-flex items-center rounded-full grad-bg text-white text-sm font-semibold px-5 py-2.5 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5">Let's Talk</a>
+        <button id="menuToggle" aria-label="Open menu" aria-expanded="false" class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center border border-black/10 dark:border-white/10">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="hidden lg:hidden mt-3 rounded-3xl glass card-shadow p-6">
+      <ul class="flex flex-col gap-4 text-base font-medium">
+        <li><a href="#home" class="mobile-link block">Home</a></li>
+        <li><a href="#about" class="mobile-link block">About</a></li>
+        <li><a href="#services" class="mobile-link block">Services</a></li>
+        <li><a href="#portfolio" class="mobile-link block">Portfolio</a></li>
+        <li><a href="#clients" class="mobile-link block">Clients</a></li>
+        <li><a href="#testimonials" class="mobile-link block">Testimonials</a></li>
+        <li><a href="#faq" class="mobile-link block">FAQ</a></li>
+        <li><a href="#contact" class="mobile-link block">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section id="home" class="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-section">
+  <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full blob" style="background:var(--primary); opacity:.25;"></div>
+  <div class="absolute top-1/3 -right-32 w-[28rem] h-[28rem] rounded-full blob" style="background:var(--secondary); opacity:.2; animation-delay:3s;"></div>
+
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center w-full">
+    <div>
+      <div data-reveal="up" class="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-primary mb-6">
+        <span class="w-1.5 h-1.5 rounded-full grad-bg"></span> Award-winning creative studio
+      </div>
+      <h1 data-reveal="up" style="transition-delay:.1s" class="font-display font-extrabold text-5xl sm:text-6xl xl:text-7xl leading-[1.05] tracking-tight">
+        Elite <span class="grad-text">Design</span>
+      </h1>
+      <p data-reveal="up" style="transition-delay:.2s" class="mt-3 font-display text-lg sm:text-xl font-medium text-muted">
+        Turning Ideas Into Premium Digital Experiences
+      </p>
+      <p data-reveal="up" style="transition-delay:.3s" class="mt-6 text-base sm:text-lg text-muted max-w-xl leading-relaxed">
+        We craft premium logos, websites, branding, and digital experiences that help businesses grow — for startups, corporates, and personal brands worldwide.
+      </p>
+
+      <div data-reveal="up" style="transition-delay:.4s" class="mt-10 flex flex-wrap gap-4">
+        <a href="#portfolio" class="btn-magnet inline-flex items-center gap-2 rounded-full grad-bg text-white font-semibold px-7 py-3.5 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30">
+          View Portfolio
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#contact" class="btn-magnet inline-flex items-center gap-2 rounded-full border-2 border-ink/10 dark:border-white/15 font-semibold px-7 py-3.5 hover:border-primary hover:text-primary hover:-translate-y-1">
+          Get Started
+        </a>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.5s" class="mt-14 grid grid-cols-3 gap-6 max-w-md">
+        <div>
+          <p class="font-display text-3xl sm:text-4xl font-extrabold grad-text counter" data-count="500">0</p>
+          <p class="text-sm text-muted mt-1">Projects Completed</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl sm:text-4xl font-extrabold grad-text counter" data-count="200">0</p>
+          <p class="text-sm text-muted mt-1">Happy Clients</p>
+        </div>
+        <div>
+          <p class="font-display text-3xl sm:text-4xl font-extrabold grad-text counter" data-count="10">0</p>
+          <p class="text-sm text-muted mt-1">Years Experience</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative h-[460px] sm:h-[560px]" data-reveal="scale" style="transition-delay:.2s">
+      <div class="absolute inset-0 rounded-card overflow-hidden card-shadow floaty-slow">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" loading="lazy" alt="Creative designer working at a modern studio desk" class="w-full h-full object-cover" width="1200" height="1400">
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent"></div>
+      </div>
+
+      <div class="absolute -bottom-8 -left-8 w-56 rounded-2xl glass card-shadow p-4 floaty" role="note">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl grad-bg flex items-center justify-center text-white font-bold">98%</div>
+          <div>
+            <p class="text-sm font-semibold">Client Satisfaction</p>
+            <p class="text-xs text-muted">Verified reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute -top-6 -right-4 w-48 rounded-2xl glass card-shadow p-4 floaty-rev">
+        <p class="text-xs font-semibold text-muted mb-2">Brand Identity</p>
+        <div class="flex gap-1.5">
+          <span class="w-6 h-6 rounded-full" style="background:#7B61FF"></span>
+          <span class="w-6 h-6 rounded-full" style="background:#A855F7"></span>
+          <span class="w-6 h-6 rounded-full" style="background:#EDE9FE"></span>
+        </div>
+      </div>
+
+      <div class="absolute top-1/2 -right-10 -translate-y-1/2 w-40 h-40 rounded-full grad-bg opacity-20 blur-xl"></div>
+    </div>
+  </div>
+
+  <a href="#about" aria-label="Scroll to About section" class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-xs text-muted">
+    Scroll
+    <span class="w-5 h-9 rounded-full border border-ink/20 dark:border-white/20 flex justify-center pt-2">
+      <span class="w-1 h-1.5 rounded-full bg-primary animate-bounce"></span>
+    </span>
+  </a>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="py-28 px-6 lg:px-10 bg-white dark:bg-[#0B0B10]">
+  <div class="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
+    <div class="relative h-[420px] sm:h-[520px]" data-reveal="left">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" loading="lazy" alt="Designer reviewing brand mockups on a laptop" class="absolute top-0 left-0 w-3/5 h-3/5 object-cover rounded-card card-shadow">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" loading="lazy" alt="Creative team collaborating around a table" class="absolute bottom-0 right-0 w-3/5 h-3/5 object-cover rounded-card card-shadow border-4 border-white dark:border-[#0B0B10]">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full grad-bg opacity-30 blur-2xl"></div>
+    </div>
+
+    <div>
+      <p data-reveal="up" class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">About Elite Design</p>
+      <h2 data-reveal="up" style="transition-delay:.1s" class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight">
+        A decade of shaping brands that stand out.
+      </h2>
+      <p data-reveal="up" style="transition-delay:.2s" class="mt-6 text-muted leading-relaxed">
+        Elite Design is a creative agency specializing in Logo Design, Brand Identity, UI/UX Design, Website Design, Social Media Design, Packaging Design, Motion Graphics, and Digital Branding — for startups, small businesses, corporates, agencies, and personal brands worldwide.
+      </p>
+
+      <div data-reveal="up" style="transition-delay:.3s" class="grid sm:grid-cols-2 gap-5 mt-8">
+        <div class="rounded-2xl bg-section p-5 grad-border">
+          <p class="font-display font-semibold mb-1">Our Mission</p>
+          <p class="text-sm text-muted">Deliver design that moves metrics — beautiful, usable, and built to convert.</p>
+        </div>
+        <div class="rounded-2xl bg-section p-5 grad-border">
+          <p class="font-display font-semibold mb-1">Our Vision</p>
+          <p class="text-sm text-muted">Become the go-to studio for brands who refuse to look ordinary.</p>
+        </div>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.4s" class="grid grid-cols-3 gap-4 mt-10">
+        <div class="text-center rounded-2xl py-6 bg-section">
+          <p class="font-display text-2xl sm:text-3xl font-extrabold grad-text counter" data-count="100">0</p>
+          <p class="text-xs text-muted mt-1">Happy Clients</p>
+        </div>
+        <div class="text-center rounded-2xl py-6 bg-section">
+          <p class="font-display text-2xl sm:text-3xl font-extrabold grad-text counter" data-count="500">0</p>
+          <p class="text-xs text-muted mt-1">Projects</p>
+        </div>
+        <div class="text-center rounded-2xl py-6 bg-section">
+          <p class="font-display text-2xl sm:text-3xl font-extrabold grad-text counter" data-count="98">0</p>
+          <p class="text-xs text-muted mt-1">% Satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="py-28 px-6 lg:px-10 bg-section">
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center max-w-2xl mx-auto mb-16" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">What we do</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">Services built for growth</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- service card template repeated -->
+      <div data-reveal="up" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Logo Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Distinctive marks that capture your brand's essence at a glance.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.05s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h16"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Brand Identity</h3>
+        <p class="text-sm text-muted leading-relaxed">Complete visual systems — color, type, and voice, unified.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.1s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path stroke-linecap="round" d="M3 9h18"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Website Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Fast, beautiful websites engineered to convert visitors.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.15s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path stroke-linecap="round" d="M9 18h6"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">UI/UX Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Intuitive interfaces backed by real user research.</p>
+      </div>
+
+      <div data-reveal="up" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Social Media Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Scroll-stopping content that keeps your brand top of mind.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.05s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Packaging Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Shelf-ready packaging that turns heads and drives sales.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.1s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 4h9l5 5v11a1 1 0 01-1 1H6a1 1 0 01-1-1V5a1 1 0 011-1z"/><path stroke-linecap="round" d="M9 13h6M9 17h4"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Print Design</h3>
+        <p class="text-sm text-muted leading-relaxed">Business cards, brochures, and collateral, precisely crafted.</p>
+      </div>
+
+      <div data-reveal="up" style="transition-delay:.15s" class="group rounded-card bg-white dark:bg-[#131319] p-7 grad-border card-shadow hover:-translate-y-2 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-2xl grad-bg flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.5-2.5v9L15 14M4 6h9a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>
+        </div>
+        <h3 class="font-display font-semibold text-lg mb-2">Motion Graphics</h3>
+        <p class="text-sm text-muted leading-relaxed">Animated stories that bring static brands to life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="py-28 px-6 lg:px-10 bg-white dark:bg-[#0B0B10]">
+  <div class="mx-auto max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
+    <div data-reveal="left">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">Why choose us</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight mb-8">
+        Premium quality, delivered without the drama.
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">Creative Thinking</p><p class="text-xs text-muted mt-1">Original concepts, never templates.</p></div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">Fast Delivery</p><p class="text-xs text-muted mt-1">Clear timelines, always met.</p></div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">Premium Quality</p><p class="text-xs text-muted mt-1">Detail-obsessed craftsmanship.</p></div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">Unlimited Revisions</p><p class="text-xs text-muted mt-1">We refine until it's right.</p></div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">Affordable Pricing</p><p class="text-xs text-muted mt-1">Premium results, fair rates.</p></div>
+        </div>
+        <div class="flex gap-3">
+          <div class="w-9 h-9 shrink-0 rounded-lg bg-accent text-primary flex items-center justify-center font-bold">✓</div>
+          <div><p class="font-semibold text-sm">24/7 Support</p><p class="text-xs text-muted mt-1">We're here whenever you need us.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative h-[420px] sm:h-[480px]" data-reveal="right">
+      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1000&q=80" loading="lazy" alt="Design team reviewing work on a MacBook" class="w-full h-full object-cover rounded-card card-shadow">
+      <div class="absolute -bottom-6 -left-6 rounded-2xl glass card-shadow px-5 py-4 floaty">
+        <p class="font-display font-bold text-2xl grad-text">10+ yrs</p>
+        <p class="text-xs text-muted">Industry experience</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio" class="py-28 px-6 lg:px-10 bg-section">
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">Our work</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">Selected projects</h2>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-12" data-reveal="up" role="tablist" aria-label="Portfolio filters">
+      <button class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="all">All</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="logo">Logo</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="branding">Branding</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="website">Website</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="ui">UI</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="social">Social</button>
+      <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-[#131319] transition-colors" data-filter="packaging">Packaging</button>
+    </div>
+
+    <div id="portfolioGrid" class="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="branding" data-reveal="up">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Nova brand identity mockup on business cards" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Branding</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Nova Identity System</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="website" data-reveal="up" style="transition-delay:.05s">
+        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcc37?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Website design mockup displayed on a laptop screen" class="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Website</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Solace E-commerce</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="logo" data-reveal="up" style="transition-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Logo design presentation mockup" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Logo</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Aurum Mark</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="ui" data-reveal="up">
+        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Mobile app UI design mockup" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">UI Design</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Finly Banking App</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="social" data-reveal="up" style="transition-delay:.05s">
+        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Social media post design templates" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Social Media</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Bloom Campaign</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="packaging" data-reveal="up" style="transition-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Product packaging design mockup" class="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Packaging</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Terra Skincare</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="branding" data-reveal="up">
+        <img src="https://images.unsplash.com/photo-1634942536790-9226c9f1c96f?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Brand stationery mockup with letterhead and cards" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Branding</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Cedar & Co. Stationery</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="website" data-reveal="up" style="transition-delay:.05s">
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Portfolio website design on desktop monitor" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">Website</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Vantage Studio Site</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+      <div class="portfolio-item mb-6 break-inside-avoid group relative rounded-card overflow-hidden card-shadow" data-cat="ui" data-reveal="up" style="transition-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1618788372246-79faff0c3742?auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Dashboard UI design mockup" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+          <p class="text-xs text-white/70 uppercase tracking-widest mb-1">UI Design</p>
+          <h3 class="text-white font-display font-semibold text-lg mb-3">Pulse Analytics Dashboard</h3>
+          <a href="#" class="inline-flex w-max items-center gap-2 text-white text-sm font-semibold border-b border-white/50 pb-0.5">View Project →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="py-28 px-6 lg:px-10 bg-white dark:bg-[#0B0B10]">
+  <div class="mx-auto max-w-4xl">
+    <div class="text-center mb-16" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">How we work</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">Our process</h2>
+    </div>
+
+    <div class="relative pl-16" id="processTimeline">
+      <div class="absolute left-[23px] top-0 bottom-0 w-[2px] bg-ink/10 dark:bg-white/10"></div>
+      <div class="progress-line" id="progressLine"></div>
+
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">01</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Research</h3>
+        <p class="text-muted text-sm max-w-md">We study your market, competitors, and audience to find the angle that makes you memorable.</p>
+      </div>
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">02</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Planning</h3>
+        <p class="text-muted text-sm max-w-md">A clear roadmap, scope, and timeline — so you always know what happens next.</p>
+      </div>
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">03</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Wireframing</h3>
+        <p class="text-muted text-sm max-w-md">Structure before style — we map layout and flow to get the foundation right.</p>
+      </div>
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">04</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Design</h3>
+        <p class="text-muted text-sm max-w-md">Visual identity comes to life with color, type, and imagery tailored to your brand.</p>
+      </div>
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">05</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Development</h3>
+        <p class="text-muted text-sm max-w-md">Clean, performant code brings the design to a fully working product.</p>
+      </div>
+      <div class="relative mb-14" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">06</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Testing</h3>
+        <p class="text-muted text-sm max-w-md">Cross-device QA and real user feedback catch issues before launch.</p>
+      </div>
+      <div class="relative" data-reveal="up">
+        <span class="absolute -left-16 top-0 w-12 h-12 rounded-full grad-bg text-white font-display font-bold flex items-center justify-center">07</span>
+        <h3 class="font-display font-semibold text-xl mb-1">Delivery</h3>
+        <p class="text-muted text-sm max-w-md">Final files, source assets, and ongoing support handed over seamlessly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLIENTS MARQUEE ================= -->
+<section id="clients" class="py-20 bg-section overflow-hidden">
+  <p class="text-center text-sm font-semibold text-muted tracking-widest uppercase mb-10" data-reveal="up">Trusted by ambitious brands</p>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="flex items-center gap-16 pr-16">
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">NORTHPEAK</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Lumen&amp;Co</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">VERTEX</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Orbital</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Solace</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Cedar &amp; Co</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">FINLY</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Bloomly</span>
+      </div>
+      <div class="flex items-center gap-16 pr-16" aria-hidden="true">
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">NORTHPEAK</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Lumen&amp;Co</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">VERTEX</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Orbital</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Solace</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Cedar &amp; Co</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">FINLY</span>
+        <span class="font-display font-bold text-2xl text-ink/30 dark:text-white/30">Bloomly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials" class="py-28 px-6 lg:px-10 bg-white dark:bg-[#0B0B10]">
+  <div class="mx-auto max-w-6xl">
+    <div class="text-center max-w-2xl mx-auto mb-16" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">Testimonials</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">What clients say</h2>
+    </div>
+
+    <div class="relative overflow-hidden" id="testimonialSlider">
+      <div class="flex transition-transform duration-700 ease-out" id="testimonialTrack">
+
+        <div class="w-full shrink-0 px-3">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">Elite Design rebuilt our entire brand identity in three weeks. The attention to detail was unreal.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Amara Chen" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Amara Chen</p><p class="text-xs text-muted">Founder, Northpeak</p></div>
+              </div>
+            </div>
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">Our conversion rate jumped 40% after the new website launched. Genuinely world-class work.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Daniel Reyes" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Daniel Reyes</p><p class="text-xs text-muted">CEO, Solace</p></div>
+              </div>
+            </div>
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">Professional, fast, and endlessly creative. They understood our vision before we finished explaining it.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Priya Nair" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Priya Nair</p><p class="text-xs text-muted">Marketing Lead, Vertex</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full shrink-0 px-3">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">The packaging redesign elevated our shelf presence instantly. Retail buyers noticed the difference.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Marcus Lee" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Marcus Lee</p><p class="text-xs text-muted">Founder, Terra Skincare</p></div>
+              </div>
+            </div>
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">Communication was flawless from kickoff to delivery. Every revision came back better than expected.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Sofia Marin" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Sofia Marin</p><p class="text-xs text-muted">COO, Cedar &amp; Co</p></div>
+              </div>
+            </div>
+            <div class="rounded-card bg-section p-7 grad-border">
+              <div class="flex text-primary mb-4" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="text-sm text-muted leading-relaxed mb-6">The app redesign made our product feel premium overnight. Users comment on the UI unprompted.</p>
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=100&q=80" loading="lazy" alt="Portrait of Jonas Weber" class="w-11 h-11 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">Jonas Weber</p><p class="text-xs text-muted">Product Lead, Finly</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center gap-2 mt-10">
+        <button class="testi-dot w-2.5 h-2.5 rounded-full grad-bg" data-i="0" aria-label="Show testimonial slide 1"></button>
+        <button class="testi-dot w-2.5 h-2.5 rounded-full bg-ink/15 dark:bg-white/15" data-i="1" aria-label="Show testimonial slide 2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="py-28 px-6 lg:px-10 bg-section">
+  <div class="mx-auto max-w-3xl">
+    <div class="text-center mb-16" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">FAQ</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">Questions, answered</h2>
+    </div>
+
+    <div class="space-y-4" id="faqList">
+      <div class="faq-item rounded-2xl bg-white dark:bg-[#131319] card-shadow overflow-hidden" data-reveal="up">
+        <button class="faq-trigger w-full flex items-center justify-between text-left px-6 py-5 font-display font-semibold" aria-expanded="false">
+          How long does a typical project take?
+          <svg class="w-5 h-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="accordion-content px-6"><p class="text-sm text-muted pb-6 leading-relaxed">Most branding projects take 2–3 weeks, while full websites typically run 4–6 weeks depending on scope and revisions.</p></div>
+      </div>
+
+      <div class="faq-item rounded-2xl bg-white dark:bg-[#131319] card-shadow overflow-hidden" data-reveal="up">
+        <button class="faq-trigger w-full flex items-center justify-between text-left px-6 py-5 font-display font-semibold" aria-expanded="false">
+          Do you offer unlimited revisions?
+          <svg class="w-5 h-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="accordion-content px-6"><p class="text-sm text-muted pb-6 leading-relaxed">Yes — every package includes unlimited revisions during the active design phase, so we get it exactly right.</p></div>
+      </div>
+
+      <div class="faq-item rounded-2xl bg-white dark:bg-[#131319] card-shadow overflow-hidden" data-reveal="up">
+        <button class="faq-trigger w-full flex items-center justify-between text-left px-6 py-5 font-display font-semibold" aria-expanded="false">
+          What industries do you work with?
+          <svg class="w-5 h-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="accordion-content px-6"><p class="text-sm text-muted pb-6 leading-relaxed">We work with startups, small businesses, corporates, agencies, and personal brands across nearly every industry, worldwide.</p></div>
+      </div>
+
+      <div class="faq-item rounded-2xl bg-white dark:bg-[#131319] card-shadow overflow-hidden" data-reveal="up">
+        <button class="faq-trigger w-full flex items-center justify-between text-left px-6 py-5 font-display font-semibold" aria-expanded="false">
+          How do I get started?
+          <svg class="w-5 h-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="accordion-content px-6"><p class="text-sm text-muted pb-6 leading-relaxed">Just reach out through the contact form below, and we'll schedule a free discovery call within 24 hours.</p></div>
+      </div>
+
+      <div class="faq-item rounded-2xl bg-white dark:bg-[#131319] card-shadow overflow-hidden" data-reveal="up">
+        <button class="faq-trigger w-full flex items-center justify-between text-left px-6 py-5 font-display font-semibold" aria-expanded="false">
+          What's included in the final delivery?
+          <svg class="w-5 h-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="accordion-content px-6"><p class="text-sm text-muted pb-6 leading-relaxed">All final source files, brand guidelines, and any relevant assets — plus 30 days of post-launch support.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="py-28 px-6 lg:px-10 bg-white dark:bg-[#0B0B10]">
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center max-w-2xl mx-auto mb-16" data-reveal="up">
+      <p class="text-sm font-semibold text-primary tracking-widest uppercase mb-3">Get in touch</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl">Let's build something great</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-3 rounded-card bg-section p-8 sm:p-10 card-shadow" data-reveal="left">
+        <form id="contactForm" class="space-y-5" novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="cf-name" class="text-sm font-medium mb-1.5 block">Name</label>
+              <input id="cf-name" name="name" type="text" required class="w-full rounded-xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#131319] px-4 py-3 text-sm focus:border-primary transition-colors" placeholder="Your full name">
+            </div>
+            <div>
+              <label for="cf-email" class="text-sm font-medium mb-1.5 block">Email</label>
+              <input id="cf-email" name="email" type="email" required class="w-full rounded-xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#131319] px-4 py-3 text-sm focus:border-primary transition-colors" placeholder="you@company.com">
+            </div>
+          </div>
+          <div>
+            <label for="cf-phone" class="text-sm font-medium mb-1.5 block">Phone</label>
+            <input id="cf-phone" name="phone" type="tel" class="w-full rounded-xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#131319] px-4 py-3 text-sm focus:border-primary transition-colors" placeholder="+1 (555) 000-0000">
+          </div>
+          <div>
+            <label for="cf-message" class="text-sm font-medium mb-1.5 block">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required class="w-full rounded-xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#131319] px-4 py-3 text-sm focus:border-primary transition-colors resize-none" placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn-magnet w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full grad-bg text-white font-semibold px-8 py-3.5 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30">
+            Send Message
+          </button>
+          <p id="formStatus" class="text-sm text-primary hidden" role="status">Thanks! Your message has been received — we'll be in touch within 24 hours.</p>
+        </form>
+      </div>
+
+      <div class="lg:col-span-2 flex flex-col gap-6" data-reveal="right">
+        <div class="rounded-card bg-section p-6 flex items-center gap-4 grad-border">
+          <div class="w-11 h-11 rounded-xl grad-bg flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div><p class="text-xs text-muted">Email</p><p class="font-semibold text-sm">hello@elitedesign.studio</p></div>
+        </div>
+        <div class="rounded-card bg-section p-6 flex items-center gap-4 grad-border">
+          <div class="w-11 h-11 rounded-xl grad-bg flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.97.76l1.1 4.4a1 1 0 01-.5 1.13l-1.85 1.03a11.05 11.05 0 005.5 5.5l1.03-1.85a1 1 0 011.13-.5l4.4 1.1a1 1 0 01.76.97V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V5z"/></svg>
+          </div>
+          <div><p class="text-xs text-muted">Phone</p><p class="font-semibold text-sm">+1 (555) 234-5678</p></div>
+        </div>
+        <div class="rounded-card bg-section p-6 flex items-center gap-4 grad-border">
+          <div class="w-11 h-11 rounded-xl grad-bg flex items-center justify-center text-white shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+          </div>
+          <div><p class="text-xs text-muted">Location</p><p class="font-semibold text-sm">Remote-first · Worldwide clients</p></div>
+        </div>
+        <a href="https://wa.me/15552345678" target="_blank" rel="noopener" class="btn-magnet rounded-card bg-[#25D366] text-white p-6 flex items-center gap-4 hover:-translate-y-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 003.85 1h.01a7.94 7.94 0 006.9-11.9 7.85 7.85 0 00-1.36-1.68zM12.06 18.4h-.01a6.58 6.58 0 01-3.36-.92l-.24-.14-2.5.66.67-2.44-.16-.25a6.6 6.6 0 1112.24-3.5 6.56 6.56 0 01-6.64 6.6zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.32-.1-.45.1-.13.2-.51.64-.63.77-.11.13-.23.14-.43.05-.2-.1-.83-.3-1.58-.98a5.9 5.9 0 01-1.09-1.36c-.11-.2-.01-.3.09-.4.1-.1.2-.23.3-.35.1-.11.13-.2.2-.33.06-.13.03-.24-.02-.34-.05-.1-.45-1.08-.61-1.48-.16-.38-.33-.33-.45-.33-.12 0-.25-.01-.39-.01-.13 0-.35.05-.53.24-.18.2-.7.68-.7 1.66 0 .98.72 1.92.82 2.05.1.13 1.4 2.14 3.4 3 .48.2.85.33 1.14.42.48.15.91.13 1.26.08.38-.06 1.17-.48 1.34-.94.16-.46.16-.86.11-.94-.05-.09-.18-.14-.38-.24z"/></svg>
+          <div><p class="font-semibold text-sm">Chat on WhatsApp</p><p class="text-xs text-white/80">Usually replies in minutes</p></div>
+        </a>
+        <div class="rounded-card overflow-hidden card-shadow h-40 relative bg-accent flex items-center justify-center">
+          <span class="text-xs text-primary font-semibold">Google Map placeholder</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-[#0B0B10] text-white/70 pt-20 pb-8 px-6 lg:px-10">
+  <div class="mx-auto max-w-7xl grid sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">
+    <div class="lg:col-span-2">
+      <a href="#home" class="font-display font-extrabold text-xl text-white flex items-center gap-2 mb-4">
+        <span class="w-8 h-8 rounded-xl grad-bg flex items-center justify-center text-white text-sm">ED</span>
+        Elite Design
+      </a>
+      <p class="text-sm max-w-xs leading-relaxed">Premium branding, UI/UX, and web design for businesses that refuse to look ordinary.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="Twitter / X" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.9 3H22l-7.6 8.7L23 21h-6.8l-5.3-6.5L4.8 21H2l8.1-9.3L1.6 3h7l4.8 6z"/></svg></a>
+        <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 100 3.5a2.5 2.5 0 004.98 0zM.5 8h4.4V23H.5V8zM8.5 8h4.2v2.05h.06c.58-1.1 2-2.26 4.13-2.26 4.42 0 5.24 2.9 5.24 6.68V23h-4.4v-6.7c0-1.6-.03-3.66-2.23-3.66-2.24 0-2.58 1.75-2.58 3.55V23h-4.4V8z"/></svg></a>
+        <a href="#" aria-label="Dribbble" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:border-primary hover:text-primary transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M4 9.5c4.5 1.5 9.5 1.5 15.2-.3M4.5 15c5-1.7 9.6-1.4 14 1.8M9 3.2c3 4 4.5 8.7 4.7 17"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-display font-semibold text-white mb-4">Quick Links</p>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="#about" class="hover:text-primary transition-colors">About</a></li>
+        <li><a href="#portfolio" class="hover:text-primary transition-colors">Portfolio</a></li>
+        <li><a href="#testimonials" class="hover:text-primary transition-colors">Testimonials</a></li>
+        <li><a href="#faq" class="hover:text-primary transition-colors">FAQ</a></li>
+        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-display font-semibold text-white mb-4">Services</p>
+      <ul class="space-y-2.5 text-sm">
+        <li><a href="#services" class="hover:text-primary transition-colors">Logo Design</a></li>
+        <li><a href="#services" class="hover:text-primary transition-colors">Brand Identity</a></li>
+        <li><a href="#services" class="hover:text-primary transition-colors">Website Design</a></li>
+        <li><a href="#services" class="hover:text-primary transition-colors">UI/UX Design</a></li>
+        <li><a href="#services" class="hover:text-primary transition-colors">Motion Graphics</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="font-display font-semibold text-white mb-4">Newsletter</p>
+      <p class="text-sm mb-4">Design tips &amp; studio news, monthly.</p>
+      <form id="newsletterForm" class="flex gap-2">
+        <label for="nl-email" class="sr-only">Email address</label>
+        <input id="nl-email" type="email" required placeholder="Email address" class="flex-1 min-w-0 rounded-full bg-white/5 border border-white/15 px-4 py-2.5 text-sm focus:border-primary transition-colors">
+        <button type="submit" aria-label="Subscribe" class="w-10 h-10 shrink-0 rounded-full grad-bg flex items-center justify-center hover:-translate-y-0.5 transition-transform">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </form>
+      <p id="nlStatus" class="text-xs text-primary mt-2 hidden">Subscribed! Welcome aboard.</p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-7xl pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-white/50">
+    <p>© <span id="year"></span> Elite Design. All rights reserved.</p>
+    <p>Crafted with care, worldwide.</p>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Dark mode
+  const root = document.documentElement;
+  const darkToggle = document.getElementById('darkToggle');
+  const iconSun = document.getElementById('iconSun');
+  const iconMoon = document.getElementById('iconMoon');
+  function setDark(on){
+    root.classList.toggle('dark', on);
+    iconSun.classList.toggle('hidden', on);
+    iconMoon.classList.toggle('hidden', !on);
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setDark(prefersDark);
+  darkToggle.addEventListener('click', () => setDark(!root.classList.contains('dark')));
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Sticky nav shrink
+  const navInner = document.getElementById('navInner');
+  window.addEventListener('scroll', () => {
+    navInner.classList.toggle('shadow-lg', window.scrollY > 40);
+  }, { passive:true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Animated counters
+  const counters = document.querySelectorAll('.counter');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1600;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target) + (target >= 100 ? '+' : (el.closest('.counter')?.dataset.count === '98' ? '' : '+'));
+        if (p < 1) requestAnimationFrame(tick); else el.textContent = target + (target === 98 ? '%' : '+');
+      }
+      requestAnimationFrame(tick);
+      counterIO.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterIO.observe(c));
+
+  // Portfolio filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      portfolioItems.forEach(item => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // Testimonial slider
+  const track = document.getElementById('testimonialTrack');
+  const dots = document.querySelectorAll('.testi-dot');
+  let testiIndex = 0;
+  function showTesti(i){
+    testiIndex = i;
+    track.style.transform = `translateX(-${i * 100}%)`;
+    dots.forEach((d, di) => d.className = `testi-dot w-2.5 h-2.5 rounded-full ${di === i ? 'grad-bg' : 'bg-ink/15 dark:bg-white/15'}`);
+  }
+  dots.forEach(d => d.addEventListener('click', () => showTesti(parseInt(d.dataset.i, 10))));
+  setInterval(() => showTesti((testiIndex + 1) % dots.length), 6000);
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-trigger').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.style.maxHeight = null;
+        b.querySelector('svg').style.transform = 'rotate(0deg)';
+      });
+      if (!isOpen){
+        btn.setAttribute('aria-expanded', 'true');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        btn.querySelector('svg').style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+
+  // Process scroll progress
+  const progressLine = document.getElementById('progressLine');
+  const timeline = document.getElementById('processTimeline');
+  window.addEventListener('scroll', () => {
+    const rect = timeline.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height;
+    const visible = Math.min(Math.max(vh * 0.6 - rect.top, 0), total);
+    progressLine.style.height = (visible / total * 100) + '%';
+  }, { passive:true });
+
+  // Contact form (demo — no backend)
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formStatus.classList.remove('hidden');
+    contactForm.reset();
+  });
+
+  // Newsletter (demo — no backend)
+  const nlForm = document.getElementById('newsletterForm');
+  const nlStatus = document.getElementById('nlStatus');
+  nlForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    nlStatus.classList.remove('hidden');
+    nlForm.reset();
+  });
+
+  // Cursor glow (desktop only, respects reduced motion)
+  const glow = document.getElementById('cursorGlow');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('mousemove', (e) => {
+      glow.style.opacity = '1';
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+  }
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e){
+      const id = this.getAttribute('href');
+      if (id.length > 1){
+        const target = document.querySelector(id);
+        if (target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
